@@ -9,3 +9,7 @@ Some planning steps:
 1. Simple wiki of LOTR
 2. Display story using wiki in some sort of visual format
 3. Identify 1 key moment in story and choose 3 options of how that moment might be different. Finetune how those moments play out in text, visual, etc
+
+Lots of Credit to:
+https://middleearthmap.app/ by https://www.yohannbethoule.com/ for the data and base code. Buy him a coffee here: https://buymeacoffee.com/yohannbethoule
+http://lotrproject.com/ by Emil Johansson for the map

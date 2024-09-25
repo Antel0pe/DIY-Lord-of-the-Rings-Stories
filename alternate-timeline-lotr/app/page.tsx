@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import Navbar from "@/components/ui/navbar"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 import Image from "next/image"
@@ -8,35 +9,7 @@ import Link from "next/link"
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <div className="mr-4 hidden md:flex">
-            <Link className="mr-6 flex items-center space-x-2" href="/">
-              <Image src="/placeholder.svg?height=32&width=32" alt="LOTR Wiki Logo" width={32} height={32} />
-              <span className="hidden font-bold sm:inline-block">LOTR Wiki</span>
-            </Link>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              <Link className="transition-colors hover:text-foreground/80 text-foreground/60" href="/characters">
-                Characters
-              </Link>
-              <Link className="transition-colors hover:text-foreground/80 text-foreground/60" href="/locations">
-                Locations
-              </Link>
-              <Link className="transition-colors hover:text-foreground/80 text-foreground/60" href="/timeline">
-                Timeline
-              </Link>
-            </nav>
-          </div>
-          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-            <div className="w-full flex-1 md:w-auto md:flex-none">
-              <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input placeholder="Search LOTR Wiki" className="pl-8" type="search" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar />
       <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
         <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
           <ScrollArea className="h-full py-6 pl-8 pr-6 lg:py-8">
