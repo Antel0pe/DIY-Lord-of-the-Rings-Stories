@@ -1,6 +1,7 @@
 import pathsData from "./paths.json";
 import { pathsLayer } from "./map";
 import L from 'leaflet'; // Import Leaflet to use its methods
+import { renderMarkersByName, renderMarkersFromFilters } from "./markers";
 
 interface PathData {
     id: string;
@@ -9,6 +10,7 @@ interface PathData {
     endDate: string;
     distance: string;
     color: string;
+    timelinesPoints: string[]
     path: number[][];
 }
 
@@ -16,7 +18,7 @@ export const renderPathsFromFilters = (filters: { paths: string[] }) => {
     pathsLayer.clearLayers();
     for (const p of pathsData as PathData[]) {
         if (filters.paths.includes(p.id)) {
-            const latLongs = p.path.map(l => L.latLng([4334 - l[1], l[0]]));
+            const latLongs = p.path.map(l => L.latLng([4825 - l[1], l[0]-200]));
             const line = L.polyline(latLongs, { color: p.color, weight: 4 });
             line.bindTooltip(pathTooltip(p), {
                 sticky: true,
@@ -29,6 +31,9 @@ export const renderPathsFromFilters = (filters: { paths: string[] }) => {
                 sticky: true,
                 className: "path-tooltip",
             }).addTo(pathsLayer);
+
+            console.log(p.timelinesPoints)
+            renderMarkersByName(p.timelinesPoints);
         }
     }
 }

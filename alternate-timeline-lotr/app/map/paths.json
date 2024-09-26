@@ -1600,6 +1600,10 @@
     "distance": "1600 miles / 2600 km",
     "startDate": "September 23, T.A. 3018",
     "endDate": "March 25, T.A. 3019",
+    "timelinesPoints": [
+      "Rivendell",
+      "Mount Doom"
+    ],
     "path": [
       [
         1484.00,

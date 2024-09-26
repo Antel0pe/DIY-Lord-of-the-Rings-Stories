@@ -21,6 +21,7 @@ interface MarkerData {
     date?: string;
     description?: string;
     infoLink?: string;
+    altTimeline?: boolean
     tags: {
         events?: string[];
         places?: string[];
@@ -47,6 +48,10 @@ export const createInfoDialog = (data: MarkerData): string => {
     if (data.infoLink) {
         info += `<span class="info-link-container"><a class="info-link" href="${data.infoLink}" target="_blank">Learn more on Tolkien Gateway</a></span>`;
     }
+
+    if (data.altTimeline){
+        info += `<input type="text" id="altTimelineSearchBar" placeholder="What if..."><button id="altTimelineButton">Enter</button>`;
+    }
     return info;
 }
 
@@ -59,14 +64,32 @@ export const renderMarkersFromFilters = (filters: String[]) => {
 
     for (const m of markersData) {
         isRendered = false;
-            const flattenedTags: Array<String> = Object.values(m.tags).flat();
-            isRendered = filters.some(filter => flattenedTags.includes(filter));
+        const flattenedTags: Array<String> = Object.values(m.tags).flat();
+        isRendered = filters.some(filter => flattenedTags.includes(filter));
         if (isRendered) {
             markers.push(createMarker(map, m));
         }
 
     }
     cluster.addLayers(markers)
+}
+
+export const renderMarkersByName = (names: String[]) =>{
+    if (cluster) {
+        cluster.clearLayers();
+    }
+
+    let markers = [];
+    for (const m of markersData) {
+        if (names.includes(m.title)) {
+            let altTimeline = {
+                ...m,
+                altTimeline: true
+            }
+            markers.push(createMarker(map, altTimeline));
+        }
+    }
+    cluster.addLayers(markers);
 }
 
 const createMarker = (map: L.Map, data: MarkerData): L.Marker => {

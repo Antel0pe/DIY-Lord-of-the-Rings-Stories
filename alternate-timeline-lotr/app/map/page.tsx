@@ -3,19 +3,29 @@
 import React, { useEffect } from 'react';
 import { loadMap } from './map';
 import { renderFilters, onFilterChange } from './filters';
+import AlternateTimelineBox from './AlternateTimelineBox';
 
 const MapPage: React.FC = () => {
+  const [altTimelineSearchText, setAltTimelineSearchText] = React.useState('');
+
   useEffect(() => {
     loadMap();
     renderFilters();
     document.querySelectorAll('#filters input[type=checkbox]').forEach((checkbox) => {
       checkbox.addEventListener('change', onFilterChange);
     });
+    // Add event listener for button that isn't rendered yet but will be on leaflet map popup
+    document.addEventListener('click', (e) => {
+        if (e.target instanceof HTMLElement && e.target.id === 'altTimelineButton') {
+            let text = (document.getElementById('altTimelineSearchBar') as HTMLInputElement)?.value;
+            setAltTimelineSearchText(text);
+        }
+    });
   }, []);
 
   return (
     <div>
-      <div id="middle-earth-map" className="h-screen w-full" style={{ zIndex: -1, position: 'absolute' }}></div>
+      <div id="middle-earth-map" className="h-screen w-screen" style={{ zIndex: -1, position: 'absolute' }}></div>
       <div className="absolute left-0 top-0 bg-white bg-opacity-50 p-4 rounded-lg shadow-lg flex flex-col">
         <div className="flex flex-wrap z-10000">
           <div className="flex flex-col" id="filters">
@@ -164,6 +174,9 @@ const MapPage: React.FC = () => {
           </div>
         </div>
       </div>
+    <div className="absolute right-0 top-0 bg-white bg-opacity-75 p-4 rounded-lg shadow-lg">
+        <AlternateTimelineBox text={altTimelineSearchText}/>
+    </div>
         <footer className="absolute bottom-0 w-full bg-gray-800 text-white p-4">
             <p id="credits">Credits to Emil Johansson, creator of <a href="http://lotrproject.com"
                                                                         rel="noopener noreferrer" target="_blank" className="text-blue-500 hover:text-blue-700">lotrproject.com</a>,
