@@ -1,12 +1,15 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadMap } from './map';
 import { renderFilters, onFilterChange } from './filters';
 import AlternateTimelineBox from './AlternateTimelineBox';
 
 const MapPage: React.FC = () => {
   const [altTimelineSearchText, setAltTimelineSearchText] = React.useState('');
+  const [popupTitle, setPopupTitle] = React.useState('');
+  const [generatedText, setGeneratedText] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false); // Added state for loading indicator
 
   useEffect(() => {
     loadMap();
@@ -17,11 +20,41 @@ const MapPage: React.FC = () => {
     // Add event listener for button that isn't rendered yet but will be on leaflet map popup
     document.addEventListener('click', (e) => {
         if (e.target instanceof HTMLElement && e.target.id === 'altTimelineButton') {
+            let popupTitleText = (document.getElementById('popupTitle'))?.innerText ?? '';
+            setPopupTitle(popupTitleText);
             let text = (document.getElementById('altTimelineSearchBar') as HTMLInputElement)?.value;
             setAltTimelineSearchText(text);
         }
     });
   }, []);
+
+  useEffect(() => {
+    const fetchAltTimeline = async () => {
+      setIsLoading(true); // Set loading indicator to true
+      try {
+        const response = await fetch(
+            `/api/timeline?searchText=${encodeURIComponent(altTimelineSearchText)}&currentLocation=${encodeURIComponent(popupTitle)}`,
+            { method: 'GET' }
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.text();
+        console.log('ChatGPT Response: ')
+        console.log(data);
+        setGeneratedText(data);
+        // Handle the response data as needed
+      } catch (error) {
+        console.error('Error fetching alt timeline:', error);
+      } finally {
+        setIsLoading(false); // Set loading indicator to false
+      }
+    };
+
+    if (altTimelineSearchText !== '') {
+      fetchAltTimeline();
+    }
+  }, [altTimelineSearchText]);
 
   return (
     <div>
@@ -174,8 +207,9 @@ const MapPage: React.FC = () => {
           </div>
         </div>
       </div>
-    <div className="absolute right-0 top-0 bg-white bg-opacity-75 p-4 rounded-lg shadow-lg">
-        <AlternateTimelineBox text={altTimelineSearchText}/>
+    <div className="absolute right-0 top-0 bg-white bg-opacity-75 p-4 rounded-lg shadow-lg w-1/5 overflow-y-auto max-h-screen">
+        <AlternateTimelineBox text={generatedText}/>
+        {isLoading && <div>Loading...</div>}
     </div>
         <footer className="absolute bottom-0 w-full bg-gray-800 text-white p-4">
             <p id="credits">Credits to Emil Johansson, creator of <a href="http://lotrproject.com"

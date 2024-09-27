@@ -33,7 +33,7 @@ interface MarkerData {
 export const createInfoDialog = (data: MarkerData): string => {
     let info = ``;
     if (data.title) {
-        info += `<h1 class="title">${data.title}`;
+        info += `<h1 class="title" id="popupTitle">${data.title}`;
         if (data.sindarinTitle) {
             info += ` (${data.sindarinTitle})`
         }
@@ -49,8 +49,11 @@ export const createInfoDialog = (data: MarkerData): string => {
         info += `<span class="info-link-container"><a class="info-link" href="${data.infoLink}" target="_blank">Learn more on Tolkien Gateway</a></span>`;
     }
 
-    if (data.altTimeline){
-        info += `<input type="text" id="altTimelineSearchBar" placeholder="What if..."><button id="altTimelineButton">Enter</button>`;
+    if (data.altTimeline) {
+        info += `<div class="alt-timeline-search">
+                    <input type="text" id="altTimelineSearchBar" placeholder="What if...">
+                    <button id="altTimelineButton">Enter</button>
+                </div>`;
     }
     return info;
 }
