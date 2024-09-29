@@ -62,7 +62,7 @@ const MapPage: React.FC = () => {
       <div className="absolute left-0 top-0 bg-white bg-opacity-50 p-4 rounded-lg shadow-lg flex flex-col">
         <div className="flex flex-wrap z-10000">
           <div className="flex flex-col" id="filters">
-            <fieldset id="filters-quests" className="mb-4">
+            {/* <fieldset id="filters-quests" className="mb-4">
                 <legend className="text-lg font-bold">Quests</legend>
 
                 <div className="flex items-center">
@@ -117,9 +117,9 @@ const MapPage: React.FC = () => {
                     <input data-category="places" data-filter="dark" id="dark-places" name="dark-places" type="checkbox" className="form-checkbox" />
                     <label htmlFor="dark-places" className="ml-2">Evil</label>
                 </div>
-            </fieldset>
+            </fieldset> */}
 
-            <fieldset id="filters-events" className="mb-4">
+            {/* <fieldset id="filters-events" className="mb-4">
                 <legend className="text-lg font-bold">Events</legend>
 
                 <div className="flex items-center">
@@ -144,12 +144,12 @@ const MapPage: React.FC = () => {
                            type="checkbox" className="form-checkbox" />
                     <label htmlFor="encounter-events" className="ml-2">Encounters</label>
                 </div>
-            </fieldset>
+            </fieldset> */}
 
             <fieldset id="filters-paths" className="mb-4">
                 <legend className="text-lg font-bold">Paths</legend>
 
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                     <input data-category="paths" data-filter="all" id="all-paths" name="all-paths" type="checkbox" className="form-checkbox" />
                     <label htmlFor="all-paths" className="ml-2">All</label>
                 </div>
@@ -158,7 +158,7 @@ const MapPage: React.FC = () => {
                     <input data-category="paths" data-filter="thorin" id="thorin-path" name="thorin-path"
                            type="checkbox" className="form-checkbox" />
                     <label htmlFor="thorin-path" className="ml-2">Thorin and Company</label>
-                </div>
+                </div> */}
 
                 <div className="flex items-center">
                     <input data-category="paths" data-filter="frodo_sam" id="frodo_sam-path" name="frodo_sam-path"
@@ -166,7 +166,7 @@ const MapPage: React.FC = () => {
                     <label htmlFor="frodo_sam-path" className="ml-2">Frodo & Sam</label>
                 </div>
 
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                     <input data-category="paths" data-filter="merry_pippin" id="merry_pippin-path" name="merry_pippin-path"
                            type="checkbox" className="form-checkbox" />
                     <label htmlFor="merry_pippin-path" className="ml-2">Merry & Pippin</label>
@@ -202,7 +202,7 @@ const MapPage: React.FC = () => {
                            name="gandalf_white-path"
                            type="checkbox" className="form-checkbox" />
                     <label htmlFor="gandalf_white-path" className="ml-2">Gandalf the White</label>
-                </div>
+                </div> */}
             </fieldset>
           </div>
         </div>
